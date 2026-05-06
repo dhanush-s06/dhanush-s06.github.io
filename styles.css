@@ -897,6 +897,45 @@ body.focused .hud-br { opacity: 0.4; }
 }
 
 /* ---------- Responsive ---------- */
+/*
+  HEIGHT-BASED QUERIES COME FIRST so that width-based queries can override
+  them on narrow screens. Without this order, a phone with height < 700px
+  (e.g. iPhone 8 at 375×667) would have the height query win and apply a
+  scale that's too large, pushing orbits off screen.
+*/
+
+/* Short screens (landscape phones, compact laptop heights) */
+@media (max-height: 700px) {
+  .system-stage { transform: scale(0.74); }
+  .welcome-left  { top: 68px; }
+  .welcome-right { bottom: 60px; }
+}
+
+@media (max-height: 560px) {
+  .system-stage { transform: scale(0.56); }
+  .welcome-left  { top: 54px; }
+  .welcome-right { bottom: 46px; }
+  .welcome-eyebrow { display: none; }
+}
+
+@media (max-height: 440px) {
+  .system-stage { transform: scale(0.44); }
+  .welcome-left  { top: 46px; }
+  .welcome-right { bottom: 38px; }
+}
+
+/* Landscape phones: hide sub-text when both short and narrow */
+@media (max-width: 900px) and (max-height: 500px) {
+  .system-stage { transform: scale(0.44); }
+  .welcome-left  { top: 48px; }
+  .welcome-right { bottom: 40px; }
+  .welcome-sub   { display: none; }
+}
+
+/*
+  WIDTH-BASED QUERIES — these come after the height queries so they always
+  win on narrow screens regardless of screen height.
+*/
 
 /* Tablets and small laptops: switch to stacked top/bottom panels */
 @media (max-width: 1100px) {
@@ -960,7 +999,7 @@ body.focused .hud-br { opacity: 0.4; }
   .welcome-sub   { font-size: 13px; margin-bottom: 18px; }
 }
 
-/* Phones */
+/* Phones — this must be last so it always wins over height-based rules */
 @media (max-width: 420px) {
   .system-stage { transform: scale(0.46); }
   .welcome-eyebrow { display: none; }
@@ -969,32 +1008,4 @@ body.focused .hud-br { opacity: 0.4; }
   .welcome-hint  { font-size: 9px; }
   .welcome-left  { top: 58px; }
   .welcome-right { bottom: 50px; }
-}
-
-/* Short screens (landscape phones, small laptop heights) */
-@media (max-height: 700px) {
-  .system-stage { transform: scale(0.74); }
-  .welcome-left  { top: 68px; }
-  .welcome-right { bottom: 60px; }
-}
-
-@media (max-height: 560px) {
-  .system-stage { transform: scale(0.56); }
-  .welcome-left  { top: 54px; }
-  .welcome-right { bottom: 46px; }
-  .welcome-eyebrow { display: none; }
-}
-
-@media (max-height: 440px) {
-  .system-stage { transform: scale(0.44); }
-  .welcome-left  { top: 46px; }
-  .welcome-right { bottom: 38px; }
-}
-
-/* Landscape phones: both short height and moderate width */
-@media (max-width: 900px) and (max-height: 500px) {
-  .system-stage { transform: scale(0.44); }
-  .welcome-left  { top: 48px; }
-  .welcome-right { bottom: 40px; }
-  .welcome-sub   { display: none; }
 }
