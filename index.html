@@ -1,89 +1,317 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>  
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
-        <title> Dhanush Somayajulu  |  Portfolio </title>
-        <link rel = "stylesheet" href = "style.css">
-    </head>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stellar Cartography — Personal Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    <body>
-        <nav>
-            <div class="container nav-container">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="resume.pdf" target="_blank" class="resume-link">Resume</a></li>
-                </ul>
-            </div>
-        </nav>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
 
-    <header class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text">
-                <h1>Hi, I'm <span class="highlight">Dhanush Somayajulu</span></h1>
-                <p class="tagline">
-                    University Student majoring in <strong>Data Visualization</strong> <br> 
-                    Minoring in <strong>CSSE</strong> & <strong>Cybersecurity</strong>
-                </p>
-            </div>
-            <div class="hero-image">
-            <img src="me.jpg" alt="Dhanush Somayajulu">
+<!-- Cosmic backdrop -->
+<div id="cosmos">
+  <canvas id="starfield"></canvas>
+  <div class="nebula n1"></div>
+  <div class="nebula n2"></div>
+  <div class="nebula n3"></div>
+  <div class="nebula n4"></div>
+  <div class="dust-band"></div>
+
+  <!-- HUD corner marks -->
+  <div class="hud-corner tl"></div>
+  <div class="hud-corner tr"></div>
+  <div class="hud-corner bl"></div>
+  <div class="hud-corner br"></div>
+
+  <!-- HUD top-left: title -->
+  <div class="hud hud-tl">
+    <div class="hud-title">Space</div>
+    <div>EST. <span class="value">JAN 2026</span> · OBSERVATORY LOG</div>
+  </div>
+
+  <!-- HUD top-right: status -->
+  <div class="hud hud-tr">
+    <div><span class="label">SYS</span> <span class="hud-bracket">[</span><span class="value" id="sysStatus">NOMINAL</span><span class="hud-bracket">]</span></div>
+    <div class="hud-rule" style="margin-left: auto;"></div>
+    <div><span class="label">CHRON</span> <span class="value" id="clock">--:--:--</span></div>
+  </div>
+
+  <!-- HUD bottom-left: coordinates -->
+  <div class="hud hud-bl">
+    <div><span class="label">NODE</span> <span class="value">SOL · 0001</span></div>
+    <div><span class="label">RA</span>  <span class="value">17h 45m 40.0s</span></div>
+    <div><span class="label">DEC</span> <span class="value">-29° 00′ 28″</span></div>
+  </div>
+
+  <!-- HUD bottom-right: navigation prompt -->
+  <div class="hud hud-br">
+    <div><span class="label">SELECT</span> <span class="value">TRANSIT BODY</span></div>
+    <div><span class="label">ZOOM</span>   <span class="value">CLICK TO ENGAGE</span></div>
+    <div><span class="label">RETURN</span> <span class="value">ESC / ARROW</span></div>
+  </div>
+
+  <!-- Welcome card (top) -->
+  <div class="welcome-name-top" id="welcomeTop">
+    <div class="greet">Welcome, traveler</div>
+  </div>
+
+  <!-- Welcome card (bottom) -->
+  <div class="welcome" id="welcomeBottom">
+    <div class="welcome-eyebrow">A Personal Portfolio · Charted in Four Bodies</div>
+    <h1 class="welcome-title">The works of <em>Dhanush Somayajulu</em>,<br/>across known space.</h1>
+    <p class="welcome-sub">A small system of curiosities, papers, and projects — orbiting in slow time. Choose a planet to begin the descent.</p>
+    <div class="welcome-hint">click any orbiting body</div>
+  </div>
+
+  <!-- Solar System (orbital view) -->
+  <div class="solar-system" id="solarSystem">
+    <div class="system-stage">
+
+      <div class="orbit o1">
+        <div class="planet-anchor">
+          <div class="planet p-mars" data-section="projects" data-name="MARS">
+            <span class="planet-label">Mars · Projects</span>
+          </div>
         </div>
+      </div>
+
+      <div class="orbit o2">
+        <div class="planet-anchor">
+          <div class="planet p-earth" data-section="about" data-name="TERRA">
+            <span class="planet-label">Earth · About</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="orbit o3">
+        <div class="planet-anchor">
+          <div class="planet p-saturn" data-section="resume" data-name="SATURN">
+            <span class="planet-label">Saturn · Résumé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="orbit o4">
+        <div class="planet-anchor">
+          <div class="planet p-neptune" data-section="contact" data-name="NEPTUNE">
+            <span class="planet-label">Neptune · Contact</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sun in the center -->
+      <div class="sun"></div>
     </div>
-</header>
+  </div>
 
-<section class="intro-section">
-    <div class="container">
-        <h2>About My Journey</h2>
-        <p>Currently a University student seeking to expand my skills by collaborating on complex projects.</p>
-        
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Major: Data Visualization</h3>
-                <p>Focusing on anaylizing complex information and communicate datasets, trends and insights to both technical and non-technical audiences. Also focusing on responsibilities with design and development of data visualization and dashboards to ensure user-friendly tools and environments.</p>
-            </div>
+  <!-- ===================== FOCUSED VIEWS ===================== -->
 
-            <div class="info-card">
-                <h3>CSSE & Cybersecurity</h3>
-                <p>Minoring in Computer Science and Software Engineering alongside Cybersecurity to ensure every project I build is scalable, efficient, and defended against modern threats.</p>
-            </div>
-        </div>
-
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Relevant Coursework</h3>
-                <ul>
-                    <li>Data Structures & Algorithms</li>
-                    <li>Computer Programming Principles</li>
-                    <li>Calculus Series</li>
-                    <li>Matrix Algebra with Application</li>
-                </ul>
-            </div>
-            <div class="info-card">
-                <h3>Technical Toolkit</h3>
-                <p><strong>Programming Languages:</strong> HTML, CSS, JavaScript, Python, C++, Java</p>
-                <p><strong>Core Concepts::</strong> Object-Oriented Programming, Data Structures & Algorithms</p>
-                <p><strong>Data Processing:</strong> Data Visualization, Data Modeling</p>
-                <p><strong>Tools & Software:</strong> AutoCAD, Tableau</p>
-                <p><strong>Strengths:</strong> Problem Solving, Leadership</p>
-            </div>
-        </div>
+  <!-- PROJECTS / Mars -->
+  <div class="focused-view" id="view-projects">
+    <div class="hero-planet-stage">
+      <div class="hero-rings-pool r3"></div>
+      <div class="hero-rings-pool r2"></div>
+      <div class="hero-rings-pool"></div>
+      <div class="hero-planet hero-mars"></div>
     </div>
-</section>
+    <div class="content-panel">
+      <div class="panel-eyebrow">Body 04 · Sol-IV · Catalog of Works</div>
+      <h2 class="panel-title">The expeditions of <em>Mars.</em></h2>
+      <div class="panel-rule"></div>
+      <p class="panel-lede">Each project, a transit. Each transit, a small theory of how things might work, tested against the cold of space.</p>
 
-        <script src = "script.js"></script>
-    </body>
-
-<footer>
-    <div class="container">
-        <p>Interested in working together?</p>
-        <div class="social-links">
-            <a href="https://github.com/dhanush-s06" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/dhanush-somayajulu-54b706299/" target="_blank">LinkedIn</a>
-            <a href="mailto:dhanush@live.com">Email Me</a>
+      <div class="panel-body">
+        <div class="project">
+          <div class="project-num">001</div>
+          <div>
+            <div class="project-name">Project Vision</div>
+            <div class="project-desc">A real-time facial recognition and object detection software which uses the camera on a device and calssifies what it is seeing. Moreover, you can also produce shapes in a 3d space using the application.</div>
+          </div>
+          <div class="project-tags">React · WebGL · D3</div>
         </div>
-        <p style="color: #444; font-size: 0.8rem; margin-top: 30px;">&copy; 2026 Dhanush Somayajulu</p>
+
+        <div class="project">
+          <div class="project-num">002</div>
+          <div>
+            <div class="project-name">Project Insight</div>
+            <div class="project-desc">
+              - A full-stack personal finance dashboard that can categorize spending by merchant, 
+              category, date and amount.</div>
+              
+              <div class="project-desc">- Uses machine learning assisted transaction categorization and 
+              also creates interactive visualizations to show trends.</div>
+              
+              <div class="project-desc">- Insight features that explain why spending has increased or decreased.</div>              
+              <div class="project-desc">- Designing PostgreSQL tables and FastAPI enpoints to store, retrieve, filter, then summarize user transaction
+              history across spendnig periods.</div>
+          </div>
+          <div class="project-tags">Next.js · Postgres</div>
+        </div>
+
+        <div class="project">
+          <div class="project-num">003</div>
+          <div>
+            <div class="project-name">Tide Engine</div>
+            <div class="project-desc">An open-source physics simulation library for orbital mechanics, with browser-native rendering.</div>
+          </div>
+          <div class="project-tags">TypeScript · Canvas</div>
+        </div>
+      </div>
     </div>
-</footer>
+  </div>
+
+  <!-- ABOUT / Earth -->
+  <div class="focused-view" id="view-about">
+    <div class="hero-planet-stage">
+      <div class="hero-rings-pool r3"></div>
+      <div class="hero-rings-pool r2"></div>
+      <div class="hero-rings-pool"></div>
+      <div class="hero-planet hero-earth"></div>
+    </div>
+    <div class="content-panel">
+      <div class="panel-eyebrow">Body 03 · Sol-III · Home World</div>
+      <h2 class="panel-title">A short biography of <em>Earth.</em></h2>
+      <div class="panel-rule"></div>
+      <p class="panel-lede">Where I'm from, what I love, and the small constellations of habit that keep the lights on.</p>
+
+      <div class="about-meta">
+        <div>
+          <div class="label">BORN</div>
+          <div class="value">India</div>
+        </div>
+        <div>
+          <div class="label">RESIDES</div>
+          <div class="value">Bothell, WA </div>
+        </div>
+        <div>
+          <div class="label">LANGUAGES</div>
+          <div class="value">ENGLISH · TELUGU · HINDI · </div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <p>I'm <strong>Dhanush Somayajulu</strong> — an Undergraduate Student based in Seattle, WA. By day I work on school assignments, research and personal projects. By night I'm usually at the gym, playing video games, or outside hanging out with my friends.</p>
+
+        <p>I grew up in India and moved to the US at 8 years old, and somewhere along the way fell into coding and space. The work I'm proudest of has always sat at the intersection of software engineering, data science and astronomy — making things that are both useful and a little bit beautiful.</p>
+
+        <p>Off-screen you'll find me at the gym most of the time, collecting stupid little figurines of my favorite chracters, or sketching all sorts of things. If you ever want to hit the gym together or connect, hit me up!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESUME / Saturn -->
+  <div class="focused-view" id="view-resume">
+    <div class="hero-planet-stage">
+      <div class="hero-planet hero-saturn"></div>
+    </div>
+    <div class="content-panel">
+      <div class="panel-eyebrow">Body 06 · Sol-VI · Public Record</div>
+      <h2 class="panel-title">The dossier of <em>Saturn.</em></h2>
+      <div class="panel-rule"></div>
+      <p class="panel-lede">Education, employment, and the various tools I've grown willing to use in earnest.</p>
+
+      <div class="panel-body">
+
+        <div class="resume-section">
+          <h3>Experience</h3>
+          <div class="resume-row">
+            <div>
+              <div class="role">Undergraduate Research Assistant</div>
+              <div class="place">University of Washington - Bothell —</div>
+              <div> •	Collaborating with a faculty researcher and graduate student on a liver therapy project, 
+                analyzing ML models used to estimate bilirubin levels while accounting for interference from other blood components. </div>
+              <div> •	Working with large biomedical datasets; reviewing and improving existing ML code for performance, accuracy, and robustness 
+                — including data preprocessing, model validation, and optimization strategies. </div>
+              <div> •	Contributing to research aimed at producing clinically relevant insights with goals toward academic publication.
+ </div>
+            </div>
+            <div class="meta">April 2026 — Now</div>
+          </div>
+        </div>
+
+        <div class="resume-section">
+          <h3>Education</h3>
+          <div class="resume-row">
+            <div>
+              <div class="role">Bachelors of Science, Data Visualization</div>
+              <div class="place">University of Washington — </div>
+              <div>  •	Minor: Computer Science & Software Engineering | GPA: 3.2 / 4.00 </div>
+              <div>  •	Concentrations: Software Engineering, Machine Learning </div>
+              <div>  •	Coursework: Data Structures & Algorithms, Objects & Design, Computer Organization & Programming, Matrix Algebra with Applications, Data Visualization </div>
+
+            </div>
+            <div class="meta">2023 — 2027</div>
+          </div>
+        </div>
+
+        <div class="resume-section">
+          <h3>Toolbelt</h3>
+          <div class="resume-skills">
+            <span>JavaScript</span><span>TypeScript</span><span>Python</span>
+            <span>React</span><span>Node.js</span><span>Java</span>
+            <span>HTML/CSS</span><span>SQL</span><span>C#</span>
+            <span>pandas</span><span>NumPy</span><span>OpenCV</span>
+            <span>Git</span><span>Tableau</span><span>Linux</span>
+            <span>PowerShell</span><span>Model Validation</span>
+            <span>Regression</span><span>Data Preprocessing</span>
+            <span>Computer Vision</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT / Neptune -->
+  <div class="focused-view" id="view-contact">
+    <div class="hero-planet-stage">
+      <div class="hero-rings-pool r3"></div>
+      <div class="hero-rings-pool r2"></div>
+      <div class="hero-rings-pool"></div>
+      <div class="hero-planet hero-neptune"></div>
+    </div>
+    <div class="content-panel">
+      <div class="panel-eyebrow">Body 08 · Sol-VIII · Open Frequencies</div>
+      <h2 class="panel-title">Send word to <em>Neptune.</em></h2>
+      <div class="panel-rule"></div>
+      <p class="panel-lede">Letters travel slowly out here, but they all arrive. Pick the channel that suits you.</p>
+
+      <div class="contact-grid">
+        <a class="contact-item" href="mailto:dhanush@live.com">
+          <span class="ci-label">EMAIL</span>
+          <span class="ci-value">dhanush@live.com</span>
+          <span class="ci-arrow">↗</span>
+        </a>
+        <a class="contact-item" href="https://github.com/dhanush-s06" target="_blank" rel="noopener">
+          <span class="ci-label">GITHUB</span>
+          <span class="ci-value">@dhanush-s06</span>
+          <span class="ci-arrow">↗</span>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/dhanush-somayajulu-54b706299/" target="_blank" rel="noopener">
+          <span class="ci-label">LINKEDIN</span>
+          <span class="ci-value">/in/dhanush-somayajulu</span>
+          <span class="ci-arrow">↗</span>
+        </a>
+
+        <a class="contact-item" href="#">
+          <span class="ci-label">LOCATION</span>
+          <span class="ci-value">[Bothell, USA]</span>
+          <span class="ci-arrow">◉</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Return button -->
+  <button class="return-btn" id="returnBtn">Return to Orbit</button>
+
+</div>
+
+<script src="script.js" defer></script>
+</body>
 </html>
