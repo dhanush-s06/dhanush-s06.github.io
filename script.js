@@ -1,15 +1,5 @@
-/* ============================================================
-   STELLAR CARTOGRAPHY — Portfolio script
-   Modules:
-     1. Starfield   — canvas parallax + twinkle
-     2. Cursor      — custom cursor with hover state
-     3. Clock       — live UTC HUD readout
-     4. Routing     — orbital ⇄ focused view transitions
-   ============================================================ */
-
-
 /* ------------------------------------------------------------
-   1. Starfield — gentle parallax + twinkling
+   1. Starfield
    ------------------------------------------------------------ */
 (() => {
   const canvas = document.getElementById('starfield');
@@ -145,9 +135,7 @@
 
 
 /* ------------------------------------------------------------
-   4. Routing — orbital ⇄ focused view
-      Pauses the orbit on hover so the planet can be clicked
-      without chasing it around the screen.
+   4. Routing
    ------------------------------------------------------------ */
 (() => {
   const body = document.body;
